@@ -1,0 +1,39 @@
+/* دَرب — طبقة مؤثرات إضافية (لا تعدّل styles.css) */
+.fx-progress{position:fixed;inset:0 0 auto 0;height:3px;z-index:100;pointer-events:none}
+.fx-progress i{display:block;height:100%;width:0;background:var(--fx,#075bd7);position:relative}
+.fx-progress i::after{content:"";position:absolute;inset-inline-end:-4px;top:-3px;width:9px;height:9px;border-radius:50%;background:var(--fx,#075bd7);box-shadow:0 0 0 4px color-mix(in srgb,var(--fx,#075bd7) 25%,transparent)}
+
+/* المركبة المتحركة على مسار الهيرو */
+.fx-halo{fill:var(--fx,#075bd7);opacity:.22;transform-box:fill-box;transform-origin:center}
+.fx-dot{fill:#fff;stroke:var(--fx,#075bd7);stroke-width:3}
+.fx-arrow{fill:var(--fx,#075bd7)}
+.fx-ring{fill:none;stroke:var(--fx,#075bd7);stroke-width:3;transform-box:fill-box;transform-origin:center}
+
+/* وسائل النقل */
+.fleet-visual{position:relative}
+.fleet-visual::after{content:"";position:absolute;inset-inline:12%;bottom:10px;height:3px;border-radius:3px;opacity:0;transition:opacity .3s;
+  background:repeating-linear-gradient(90deg,var(--fx,#075bd7) 0 16px,transparent 16px 32px)}
+.fleet-card:hover .fleet-visual::after,.fleet-card:focus-within .fleet-visual::after{opacity:.35}
+.fleet-card .fleet-visual img{transition:opacity .6s,transform .9s cubic-bezier(.16,1,.3,1)}
+.fleet-card.fx-pre .fleet-visual img{opacity:0;transform:translateX(70px)}
+.coverage-tags span:not(.coming-soon)::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#075bd7;margin-inline-end:8px}
+.button span[aria-hidden],.header-cta span[aria-hidden],.service-link span[aria-hidden],.text-link span[aria-hidden]{display:inline-block;transition:transform .25s}
+.button:hover span[aria-hidden],.header-cta:hover span[aria-hidden],.service-link:hover span[aria-hidden],.text-link:hover span[aria-hidden]{transform:translateX(-6px)}
+
+@media (prefers-reduced-motion:no-preference){
+  .route-card{opacity:0;transform-box:fill-box;transform-origin:center bottom;animation:fx-card .6s cubic-bezier(.2,1.4,.4,1) forwards}
+  .route-card-a{animation-delay:.5s}.route-card-b{animation-delay:1.9s}
+  .route-point{transform-box:fill-box;transform-origin:center;animation:fx-beat 2.2s ease-in-out infinite}
+  .route-point-b{animation-delay:1.1s}
+  .fx-halo{animation:fx-beat 1.4s ease-in-out infinite}
+  .fleet-card:hover .fleet-visual img{animation:fx-idle .16s linear infinite}
+  .fleet-card:hover .fleet-visual::after{animation:fx-road .7s linear infinite}
+  .step.fx-ping .step-count{animation:fx-ping 1.1s ease-out}
+  .coverage-tags span:not(.coming-soon)::before{animation:fx-live 1.8s ease-out infinite}
+}
+@keyframes fx-card{from{opacity:0;transform:translateY(10px) scale(.85)}to{opacity:1;transform:none}}
+@keyframes fx-beat{50%{transform:scale(1.25)}}
+@keyframes fx-idle{50%{transform:translateY(-1.5px)}}
+@keyframes fx-road{to{background-position:-32px 0}}
+@keyframes fx-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--fx,#075bd7) 45%,transparent)}100%{box-shadow:0 0 0 18px transparent}}
+@keyframes fx-live{0%{box-shadow:0 0 0 0 rgba(7,91,215,.45)}100%{box-shadow:0 0 0 9px rgba(7,91,215,0)}}
